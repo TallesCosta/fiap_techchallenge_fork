@@ -17,8 +17,11 @@ spec:
       - name: postgres-ctn
         image: postgres:alpine3.18
         resources:
+          requests:
+            memory: "102Mi"
+            cpu: "150m"
           limits:
-            memory: "128Mi"
+            memory: "204Mi"
             cpu: "300m"
         ports:
         - containerPort: 5432
