@@ -27,8 +27,11 @@ spec:
         image: ${FIAP_TECHCHALLENGE_DOCKER_IMAGE}
         imagePullPolicy: Always
         resources:
+          requests:
+            memory: "409Mi"
+            cpu: "350m"
           limits:
-            memory: "384Mi"
+            memory: "819Mi"
             cpu: "700m"
         livenessProbe:
           httpGet: &http
@@ -73,7 +76,7 @@ spec:
     kind: Deployment
     name: backendapi-dep
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:
@@ -95,11 +98,10 @@ kind: Service
 metadata:
   name: backendapi-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: backendapi
   ports:
     - name: http
       port: 80
-      targetPort: http-web
-      nodePort: 30808
+      targetPort: 8080

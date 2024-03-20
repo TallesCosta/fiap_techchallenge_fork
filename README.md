@@ -91,7 +91,7 @@ etapas teremos os seguintes recursos adicionados ao cluster:
 
 Agora temos os recursos necessários para subir a aplicação backend dentro do cluster, há duas possíveis formas de fazer isso:
 1- Definir uma variável de ambiente com: `export FIAP_TECHCHALLENGE_DOCKER_IMAGE = public.ecr.aws/h6u9l9z6/fiap_techchallenge:latest`
-e logo em seguida executar `kubectl apply -f k8s/backend_api.yaml` ou
+e logo em seguida executar `envsubst < k8s/backend_api.yaml | kubectl apply -f -` ou
 2- Executar o comando: `FIAP_TECHCHALLENGE_DOCKER_IMAGE=public.ecr.aws/h6u9l9z6/fiap_techchallenge:latest envsubst < k8s/backend_api.yaml | kubectl apply -f -`
 
 Tudo correndo como o esperado ao final da execução do comando teremos nosso backend
